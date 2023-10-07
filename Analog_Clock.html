@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>analog_clock</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Ubuntu Condensed', sans-serif;
+            color: white;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+            background-color: white;
+        }
+        .container{
+            position: relative;
+        }
+        .clock{
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: linear-gradient(rgb(230, 100, 101), rgb(145, 152, 229));
+            border: 2px solid rgb(138, 66, 24);
+            box-shadow: 0px 0px 60px rgb(138, 66, 24);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .clock span{
+            position: absolute;
+            transform: rotate(calc(30deg * var(--i)));
+            inset: 15px;
+            text-align: center;
+        }
+        .clock span b{
+            transform: rotate(calc(-30deg * var(--i)));
+            display: inline-block;
+            font-size: 25px;
+        }
+        .clock::before{
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: white;
+        }
+        .hand{
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .hand i{
+            position: absolute;
+            background-color: var(--clr);
+            width: 5px;
+            /* height: 130px; */
+            border-radius: 10px;
+        }
+        #second i{
+            height: 200px;
+            background-color: deeppink;
+        }
+        #minute i{
+            height: 170px;
+            background-color: skyblue;
+        }
+        #hour i{
+            height: 140px;
+            background-color: white;
+        }
+        #name{
+            color: black;
+            font-size:xx-large;
+            padding-bottom: 150px;
+        }
+    </style>
+</head>
+<body>    
+    <div class="container">
+        <div class="clock">
+
+            <div  id="second" class="hand"><i></i></div>
+            <div  id="minute" class="hand"><i></i></div>
+            <div  id="hour" class="hand"><i></i></div>
+            <div id="name">Umarz</div>
+
+            <span style="--i:1;"><b>1</b></span>
+            <span style="--i:.;"><b>.</b></span>
+            <span style="--i:2;"><b>2</b></span>
+            <span style="--i:3;"><b>3</b></span>
+            <span style="--i:4;"><b>4</b></span>
+            <span style="--i:5;"><b>5</b></span>
+            <span style="--i:6;"><b>6</b></span>
+            <span style="--i:7;"><b>7</b></span>
+            <span style="--i:8;"><b>8</b></span>
+            <span style="--i:9;"><b>9</b></span>
+            <span style="--i:10;"><b>10</b></span>
+            <span style="--i:11;"><b>11</b></span>
+            <span style="--i:12;"><b>12</b></span>
+        </div>
+    </div>
+    <script>
+        let hr = document.getElementById("hour");
+        let min = document.getElementById("minute");
+        let sec = document.getElementById("second");
+
+        function currentTime(){
+            let date = new Date();
+            let h = date.getHours();
+            let m = date.getMinutes();
+            let s = date.getSeconds();
+
+            let hrotation = 30*h + m/2;
+            let mrotation = 6*m;
+            let srotation = 6*s;
+
+            hr.style.transform = `rotate(${hrotation}deg)`;
+            min.style.transform = `rotate(${mrotation}deg)`;
+            sec.style.transform = `rotate(${srotation}deg)`;
+        }
+
+        setInterval(currentTime, 1000);
+    </script>
+</body>
+</html>
